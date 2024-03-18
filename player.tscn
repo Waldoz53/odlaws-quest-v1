@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://brhw1yhx8rpg7"]
+
+[ext_resource type="Texture2D" uid="uid://ck6n4moqxrc5l" path="res://assets/odlaw_sprite.png" id="1_g06q5"]
+[ext_resource type="Script" path="res://player.gd" id="1_hw0eq"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qxl8r"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_g06q5")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_18061"]
+size = Vector2(12.5, 14.5)
+
+[node name="Player" type="Area2D"]
+position = Vector2(0, -1)
+script = ExtResource("1_hw0eq")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_qxl8r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.75)
+shape = SubResource("RectangleShape2D_18061")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
